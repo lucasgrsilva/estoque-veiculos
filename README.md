@@ -1,4 +1,4 @@
-# Estoque-veiculos
+# Estoque Veículos
 Este projeto é uma API para controle de estoque de Veículos sem persistência de dados elaborado utilizando o Spring.
 
 ## Requisitos
