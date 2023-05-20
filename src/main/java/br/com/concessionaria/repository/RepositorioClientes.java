@@ -13,9 +13,26 @@ public class RepositorioClientes {
         clientes.add(cliente);
     }
 
-    public Optional<Cliente> buscarPorId(int idCliente) {
+    public void removerCliente(Cliente cliente) {
+        clientes.remove(cliente);
+    }
+
+    public List<Cliente> getAll() {
+        return clientes;
+    }
+
+    public Optional<Cliente> getClientePorId(int idCliente) {
         return clientes.stream()
                 .filter(cli -> cli.getId() == idCliente)
                 .findFirst();
+    }
+    public Optional<Cliente> getClientePorCpf(String cpf) {
+        return clientes.stream()
+                .filter(cli -> cli.getCpf().equals(cpf))
+                .findFirst();
+    }
+
+    public int getProximoId() {
+        return clientes.get(clientes.size() - 1).getId() + 1;
     }
 }

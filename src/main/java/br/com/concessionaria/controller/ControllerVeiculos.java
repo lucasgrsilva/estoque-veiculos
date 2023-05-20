@@ -8,16 +8,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ControleVeiculos {
+public class ControllerVeiculos {
     private final ServicoVeiculo servicoVeiculo;
 
-    public ControleVeiculos(ServicoVeiculo servicoVeiculo) {
+    public ControllerVeiculos(ServicoVeiculo servicoVeiculo) {
         this.servicoVeiculo = servicoVeiculo;
+    }
+
+    @GetMapping("api/veiculos")
+    public ResponseEntity<List<Veiculo>> listarVeiculos() {
+        return ResponseEntity.ok(servicoVeiculo.getVeiculos());
     }
 
     @GetMapping("api/veiculos/chassi/{chassi}")
     public ResponseEntity<Veiculo> buscarPorChasi(@PathVariable int chassi) {
-        Veiculo veiculoEncontrado = servicoVeiculo.buscarPorChassi(chassi);
+        Veiculo veiculoEncontrado = servicoVeiculo.buscarVeiculoPorChassi(chassi);
 
         return ResponseEntity.ok(veiculoEncontrado);
     }
@@ -36,7 +41,14 @@ public class ControleVeiculos {
 
     @GetMapping("api/veiculos/{modelo}")
     public ResponseEntity<List<Veiculo>> buscarPorModelo(@PathVariable String modelo) {
-        List<Veiculo> veiculosEncontrados = servicoVeiculo.buscarPorModelo(modelo);
+        List<Veiculo> veiculosEncontrados = servicoVeiculo.buscarVeiculosPorModelo(modelo);
+
+        return ResponseEntity.ok(veiculosEncontrados);
+    }
+
+    @GetMapping("api/veiculos/ano")
+    public ResponseEntity<List<Veiculo>> buscarPorAnoDeFabricacao(int anoMin, int anoMax) {
+        List<Veiculo> veiculosEncontrados = servicoVeiculo.buscarVeiculosPorAnoDeFabricacao(anoMin, anoMax);
 
         return ResponseEntity.ok(veiculosEncontrados);
     }
@@ -53,5 +65,12 @@ public class ControleVeiculos {
         Moto motoSalva = servicoVeiculo.adicionarMoto(novaMoto);
 
         return ResponseEntity.ok(motoSalva);
+    }
+
+    @DeleteMapping("api/veiculos/{id}")
+    public ResponseEntity<Boolean> deletarVeiculo(@PathVariable int id) {
+        servicoVeiculo.deletarVeiculo(id);
+
+        return ResponseEntity.ok(true);
     }
 }

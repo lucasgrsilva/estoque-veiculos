@@ -4,7 +4,6 @@ import br.com.concessionaria.domain.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 public class RepositorioVeiculos {
@@ -14,32 +13,28 @@ public class RepositorioVeiculos {
         veiculos.add(veiculo);
     }
 
-    public void removerVeiculo(int idVeiculo) {
-        Optional veiculoOptional = veiculos.stream()
-                .filter(veiculo -> veiculo.getId() == idVeiculo)
-                .findFirst();
-
-        if (veiculoOptional.isEmpty()) {
-            throw new RuntimeException("Não foi encontrado veículo para o id especificado");
-        }
-
-        veiculos.remove(veiculoOptional.get());
+    public void removerVeiculo(Veiculo veiculo) {
+        veiculos.remove(veiculo);
     }
 
-    public Optional<Veiculo> buscarPorChassi(int chassi) {
+    public List<Veiculo> getAll() {
+        return veiculos;
+    }
+
+    public Optional<Veiculo> getVeiculoPorChassi(int chassi) {
         return veiculos.stream()
                 .filter(veiculo -> veiculo.getChassi() == chassi)
                 .findFirst();
     }
 
-    public List<Veiculo> buscarPorAnoFabricação(int anoFabricacaoMinimo, int anoFabricacaoMaximo) {
+    public List<Veiculo> getVeiculosPorAnoFabricação(int anoFabricacaoMinimo, int anoFabricacaoMaximo) {
         return veiculos.stream()
                 .filter(veiculo -> veiculo.getAnoFabricacao() >= anoFabricacaoMinimo &&
                         veiculo.getAnoFabricacao() <= anoFabricacaoMaximo)
                 .toList();
     }
 
-    public List<Veiculo> buscarCarrosPorMarca(MarcasCarro marcaCarro) {
+    public List<Veiculo> getCarrosPorMarca(MarcasCarro marcaCarro) {
         return veiculos.stream()
                 .filter(veiculo -> {
                     if(!veiculo.getClass().isAssignableFrom(Carro.class)) {
@@ -52,7 +47,7 @@ public class RepositorioVeiculos {
                 .toList();
     }
 
-    public List<Veiculo> buscarMotosPorMarca(MarcasMoto marcaMoto) {
+    public List<Veiculo> getMotosPorMarca(MarcasMoto marcaMoto) {
         return veiculos.stream()
                 .filter(veiculo -> {
                     if(!veiculo.getClass().isAssignableFrom(Moto.class)) {
@@ -65,25 +60,25 @@ public class RepositorioVeiculos {
                 .toList();
     }
 
-    public List<Veiculo> buscarPorModelo(String modelo) {
+    public List<Veiculo> getVeiculosPorModelo(String modelo) {
         return veiculos.stream()
                 .filter(veiculo -> veiculo.getModelo().equals(modelo))
                 .toList();
     }
 
-    public Optional<Veiculo> buscarPorPlaca(String placa) {
+    public Optional<Veiculo> getVeiculoPorPlaca(String placa) {
         return veiculos.stream()
                 .filter(veiculo -> veiculo.getPlaca().equals(placa))
                 .findFirst();
     }
 
-    public Optional<Veiculo> buscarPorId(int id) {
+    public Optional<Veiculo> getVeiculoPorId(int id) {
         return veiculos.stream()
                 .filter(veiculo -> veiculo.getId() == id)
                 .findFirst();
     }
 
-    public int getQuantidadeDeVeiculos() {
-        return veiculos.size();
+    public int getProximoId() {
+        return veiculos.get(veiculos.size() - 1).getId() + 1;
     }
 }

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Venda {
+    private int id;
     private LocalDate dataDaCompra;
     private BigDecimal precoDeVenda;
     private Veiculo veiculoVendido;
@@ -11,8 +12,9 @@ public class Venda {
     private MetodoDePagamento metodoPagamento;
     private int numParcelas;
 
-    public Venda(LocalDate dataDaCompra, BigDecimal precoDeVenda, Veiculo veiculoVendido, Cliente clienteVenda,
+    public Venda(int id, LocalDate dataDaCompra, BigDecimal precoDeVenda, Veiculo veiculoVendido, Cliente clienteVenda,
                  MetodoDePagamento metodoPagamento, int numParcelas) {
+        this.id = id;
 		this.dataDaCompra = dataDaCompra;
 		this.precoDeVenda = precoDeVenda;
 		this.veiculoVendido = veiculoVendido;
@@ -21,7 +23,15 @@ public class Venda {
 		this.numParcelas = numParcelas;
 	}
 
-	public int getNumParcelas() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNumParcelas() {
 		return numParcelas;
 	}
 

@@ -5,7 +5,6 @@ import br.com.concessionaria.exception.VeiculoInvalidoException;
 import br.com.concessionaria.exception.VeiculoNaoEncontradoException;
 import br.com.concessionaria.repository.RepositorioVeiculos;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -36,63 +35,77 @@ public class ServicoVeiculo {
         repositorioVeiculos.adicionarVeiculo(moto2);
     }
 
-    public Veiculo buscarPorChassi(int chassi) {
-        return repositorioVeiculos.buscarPorChassi(chassi)
+    public List<Veiculo> getVeiculos() {
+        return repositorioVeiculos.getAll();
+    }
+
+    public Veiculo buscarVeiculoPorChassi(int chassi) {
+        return repositorioVeiculos.getVeiculoPorChassi(chassi)
                 .orElseThrow(VeiculoNaoEncontradoException::new);
     }
 
     public List<Veiculo> buscarCarroPorMarca(MarcasCarro marcaCarro) {
-        return repositorioVeiculos.buscarCarrosPorMarca(marcaCarro);
+        return repositorioVeiculos.getCarrosPorMarca(marcaCarro);
     }
 
     public List<Veiculo> buscarMotoPorMarca(MarcasMoto marcaMoto) {
-        return repositorioVeiculos.buscarMotosPorMarca(marcaMoto);
+        return repositorioVeiculos.getMotosPorMarca(marcaMoto);
     }
 
-    public List<Veiculo> buscarPorModelo(String modelo) {
-        return repositorioVeiculos.buscarPorModelo(modelo);
+    public List<Veiculo> buscarVeiculosPorModelo(String modelo) {
+        return repositorioVeiculos.getVeiculosPorModelo(modelo);
     }
 
-    public Veiculo buscarPorId(int id) {
-        return repositorioVeiculos.buscarPorId(id)
+    public Veiculo buscarVeiculoPorId(int id) {
+        return repositorioVeiculos.getVeiculoPorId(id)
                 .orElseThrow(VeiculoNaoEncontradoException::new);
+    }
+
+    public List<Veiculo> buscarVeiculosPorAnoDeFabricacao(int anoMinimo, int anoMaximo) {
+        return repositorioVeiculos.getVeiculosPorAnoFabricação(anoMinimo, anoMaximo);
     }
 
     public Carro adicionarCarro(Carro novoCarro) {
         //verificando se chassi é único
-        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.buscarPorChassi(novoCarro.getChassi());
+        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.getVeiculoPorChassi(novoCarro.getChassi());
         if (veiculoComMesmoChassi.isPresent()) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
         //verificando se placa é única
-        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.buscarPorPlaca(novoCarro.getPlaca());
+        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.getVeiculoPorPlaca(novoCarro.getPlaca());
         if (veiculoComMesmaPlaca.isPresent()) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
-        novoCarro.setId(repositorioVeiculos.getQuantidadeDeVeiculos() + 1);
+        novoCarro.setId(repositorioVeiculos.getProximoId());
         repositorioVeiculos.adicionarVeiculo(novoCarro);
 
         return novoCarro;
     }
     public Moto adicionarMoto(Moto novaMoto) {
         //verificando se chassi é único
-        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.buscarPorChassi(novaMoto.getChassi());
+        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.getVeiculoPorChassi(novaMoto.getChassi());
         if (veiculoComMesmoChassi.isPresent()) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
         //verificando se placa é única
-        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.buscarPorPlaca(novaMoto.getPlaca());
+        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.getVeiculoPorPlaca(novaMoto.getPlaca());
         if (veiculoComMesmaPlaca.isPresent()) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
-        novaMoto.setId(repositorioVeiculos.getQuantidadeDeVeiculos() + 1);
+        novaMoto.setId(repositorioVeiculos.getProximoId());
         repositorioVeiculos.adicionarVeiculo(novaMoto);
 
         return novaMoto;
     }
 
+    public void deletarVeiculo(int id) {
+        Veiculo veiculoEncontrado = repositorioVeiculos.getVeiculoPorId(id)
+                        .orElseThrow(VeiculoNaoEncontradoException::new);
+
+        repositorioVeiculos.removerVeiculo(veiculoEncontrado);
+    }
 }
