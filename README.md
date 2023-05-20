@@ -1,4 +1,4 @@
-# Estoque-veiculos
+# Estoque Veículos
 Este projeto é uma API para controle de estoque de Veículos e foi elaborado utilizando o Spring.
 Para executá-lo utilizando o Swagger, recomenda-se a utilização da IDE IntelliJ.
 
