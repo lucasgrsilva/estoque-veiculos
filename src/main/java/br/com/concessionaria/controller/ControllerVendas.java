@@ -18,9 +18,17 @@ public class ControllerVendas {
         this.servicoVenda = servicoVenda;
     }
 
+    @GetMapping("api/vendas")
+    public ResponseEntity<List<VendaResponse>> listarVendas() {
+        List<VendaResponse> responses = servicoVenda.getVendas().stream()
+                .map(VendaResponse::new).toList();
+
+        return ResponseEntity.ok(responses);
+    }
+
     @GetMapping("api/vendas/veiculo/{modelo}")
     public ResponseEntity<List<VendaResponse>> buscarPorVeiculo(@PathVariable String modelo) {
-        List<Venda> vendasEncontradas = servicoVenda.buscarPorVeiculo(modelo);
+        List<Venda> vendasEncontradas = servicoVenda.buscarVendasPorVeiculo(modelo);
 
         List<VendaResponse> vendasResponse = vendasEncontradas.stream()
                 .map(VendaResponse::new)
@@ -31,7 +39,7 @@ public class ControllerVendas {
 
     @GetMapping("api/vendas/cliente/{cpf}")
     public ResponseEntity<List<VendaResponse>> buscarPorCliente(@PathVariable String cpf) {
-        List<Venda> vendasEncontradas = servicoVenda.buscarPorCliente(cpf);
+        List<Venda> vendasEncontradas = servicoVenda.buscarVendasPorCliente(cpf);
         List<VendaResponse> vendasResponse = vendasEncontradas.stream()
                 .map(VendaResponse::new)
                 .toList();
@@ -44,5 +52,12 @@ public class ControllerVendas {
         Venda vendaAdicionada = servicoVenda.adicionarVenda(novaVenda);
 
         return ResponseEntity.ok(new VendaResponse(vendaAdicionada));
+    }
+
+    @DeleteMapping("api/vendas/{id}")
+    public ResponseEntity<Boolean> deletarVenda(@PathVariable int id) {
+        servicoVenda.deletarVenda(id);
+
+        return ResponseEntity.ok(true);
     }
 }

@@ -14,13 +14,36 @@ public class Endereco{
         final String bairro,
         final String cep,
         final String estado,
-        final String cidade)
-        {
+        final String cidade) {
             this.logadouro = logadouro;
             this.numero = numero;
             this.bairro = bairro;
             this.cep = cep;
             this.cidade = cidade;
             this.estado = estado;
-        }
+    }
+
+    public String getLogadouro() {
+        return logadouro;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
 }

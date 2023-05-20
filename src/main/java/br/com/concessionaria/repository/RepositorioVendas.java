@@ -4,19 +4,20 @@ import br.com.concessionaria.domain.entity.Venda;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RepositorioVendas {
-    private List<Venda> vendas;
+    private static final List<Venda> vendas = new ArrayList<>();
 
-    public RepositorioVendas() {
-        this.vendas = new ArrayList<>();
-    }
-
-    public void addVenda(Venda venda) {
+    public void adicionarVenda(Venda venda) {
         this.vendas.add(venda);
     }
 
-    public List<Venda> getVendas() {
+    public void removerVenda(Venda venda) {
+        vendas.remove(venda);
+    }
+
+    public List<Venda> getAll() {
         return vendas;
     }
     
@@ -38,6 +39,16 @@ public class RepositorioVendas {
             }
         }
         return vendas;
+    }
+
+    public Optional<Venda> getVendaPorId(int id) {
+        return vendas.stream()
+                .filter(venda -> venda.getId() == id)
+                .findFirst();
+    }
+
+    public int getProximoId() {
+        return vendas.get(vendas.size() - 1).getId() + 1;
     }
 
 }

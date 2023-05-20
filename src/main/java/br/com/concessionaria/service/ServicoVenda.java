@@ -2,10 +2,10 @@ package br.com.concessionaria.service;
 
 import br.com.concessionaria.domain.dto.RequisicaoNovaVenda;
 import br.com.concessionaria.domain.entity.*;
+import br.com.concessionaria.exception.VendaNaoEncontradaException;
 import br.com.concessionaria.repository.RepositorioVendas;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -24,21 +24,34 @@ public class ServicoVenda {
         Cliente cliente = servicoCliente.buscarPorId(novaVenda.getIdCliente());
 
         //verificando se veiculo está cadastrado
-        Veiculo veiculo = servicoVeiculo.buscarPorId(novaVenda.getIdVeiculo());
+        Veiculo veiculo = servicoVeiculo.buscarVeiculoPorId(novaVenda.getIdVeiculo());
 
-        Venda venda = new Venda(LocalDate.now(), novaVenda.getPrecoDeVenda(), veiculo, cliente,
+        int idNovaVenda = repositorioVendas.getProximoId();
+
+        Venda venda = new Venda(idNovaVenda, LocalDate.now(), novaVenda.getPrecoDeVenda(), veiculo, cliente,
                 novaVenda.getMetodoDePagamento(), novaVenda.getNumParcelas());
 
-        repositorioVendas.addVenda(venda);
+        repositorioVendas.adicionarVenda(venda);
 
         return venda;
     }
 
-    public List<Venda> buscarPorCliente(String cpfCliente) {
+    public List<Venda> getVendas() {
+        return repositorioVendas.getAll();
+    }
+
+    public List<Venda> buscarVendasPorCliente(String cpfCliente) {
         return repositorioVendas.getVendasPorCliente(cpfCliente);
     }
 
-    public List<Venda> buscarPorVeiculo(String modeloVeiculo) {
+    public List<Venda> buscarVendasPorVeiculo(String modeloVeiculo) {
         return repositorioVendas.getVendasPorVeiculo(modeloVeiculo);
+    }
+
+    public void deletarVenda(int id) {
+        Venda vendaEncontrada = repositorioVendas.getVendaPorId(id)
+                .orElseThrow(VendaNaoEncontradaException::new);
+
+        repositorioVendas.removerVenda(vendaEncontrada);
     }
 }

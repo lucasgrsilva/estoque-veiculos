@@ -1,28 +1,18 @@
 package br.com.concessionaria.domain.entity;
 
 public class Cliente {
+    private int id;
     private String nome;
     private String telefone;
     private Endereco endereco;
-    
-    public int getId() {
-		return id;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
 	private String cpf;
-    private int id;
 
-    public Cliente(String nome, String telefone, Endereco endereco, String cpf, int id) {
+    public Cliente(int id, String nome, String telefone, Endereco endereco, String cpf) {
+		this.id = id;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
 		this.cpf = cpf;
-		this.id = id;
 	}
 
 
@@ -56,5 +46,13 @@ public class Cliente {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class VendaResponse {
+    private final int id;
     private final LocalDate dataDaCompra;
     private final BigDecimal precoDeVenda;
     private final int idVeiculo;
@@ -19,6 +20,7 @@ public class VendaResponse {
     private final int numParcelas;
 
     public VendaResponse(Venda venda) {
+        id = venda.getId();
         dataDaCompra = venda.getDataDaCompra();
         precoDeVenda = venda.getPrecoDeVenda();
         idVeiculo = venda.getVeiculoVendido().getId();
