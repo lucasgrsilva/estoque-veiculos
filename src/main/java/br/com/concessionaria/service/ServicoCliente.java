@@ -4,7 +4,9 @@ import br.com.concessionaria.domain.entity.Cliente;
 import br.com.concessionaria.domain.entity.Endereco;
 import br.com.concessionaria.exception.ClienteNaoEncontradoException;
 import br.com.concessionaria.repository.RepositorioClientes;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ServicoCliente {
     private final RepositorioClientes repositorioClientes = new RepositorioClientes();
 

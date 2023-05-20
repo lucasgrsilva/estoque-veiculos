@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class ControleVeiculos {
+public class ControllerVeiculos {
     private final ServicoVeiculo servicoVeiculo;
 
-    public ControleVeiculos(ServicoVeiculo servicoVeiculo) {
+    public ControllerVeiculos(ServicoVeiculo servicoVeiculo) {
         this.servicoVeiculo = servicoVeiculo;
     }
 

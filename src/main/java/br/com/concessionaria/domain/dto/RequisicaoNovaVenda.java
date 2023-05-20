@@ -2,14 +2,20 @@ package br.com.concessionaria.domain.dto;
 
 import br.com.concessionaria.domain.entity.MetodoDePagamento;
 
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class RequisicaoNovaVenda {
+    @NotNull(message = "O preço de venda deve ser definido")
     private BigDecimal precoDeVenda;
+    @NotNull(message = "O id do Veículo vendido deve ser definido")
     private int idVeiculo;
+    @NotNull(message = "O id do Cliente deve ser definido")
     private int idCliente;
+    @NotNull(message = "O método de pagamento deve ser definido")
     private MetodoDePagamento metodoDePagamento;
+    @NotNull(message = "O número de parcelas deve ser definido")
     private int numParcelas;
 
     public BigDecimal getPrecoDeVenda() {
