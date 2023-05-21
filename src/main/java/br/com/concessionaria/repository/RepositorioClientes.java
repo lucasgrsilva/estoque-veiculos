@@ -33,6 +33,10 @@ public class RepositorioClientes {
     }
 
     public int getProximoId() {
+        if (clientes.isEmpty()) {
+            return 1;
+        }
+
         return clientes.get(clientes.size() - 1).getId() + 1;
     }
 }

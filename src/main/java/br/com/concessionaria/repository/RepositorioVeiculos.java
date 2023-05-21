@@ -79,6 +79,9 @@ public class RepositorioVeiculos {
     }
 
     public int getProximoId() {
+        if (veiculos.isEmpty()) {
+            return 1;
+        }
         return veiculos.get(veiculos.size() - 1).getId() + 1;
     }
 }

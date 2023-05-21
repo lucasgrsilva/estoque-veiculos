@@ -48,7 +48,7 @@ public class RepositorioVendas {
         BigDecimal total = BigDecimal.ZERO;
         for (Venda venda : vendas) {
             LocalDate dataVenda = venda.getDataDaCompra();
-            if (dataVenda.isAfter(dataInicio) && dataVenda.isBefore(dataFim)) {
+            if (dataVenda.isAfter(dataInicio) && dataVenda.isBefore(dataFim.plusDays(1))) {
                 total = total.add(venda.getPrecoDeVenda());
             }
         }
@@ -72,6 +72,9 @@ public class RepositorioVendas {
     }
 
     public int getProximoId() {
+        if (vendas.isEmpty()) {
+            return 1;
+        }
         return vendas.get(vendas.size() - 1).getId() + 1;
     }
 
