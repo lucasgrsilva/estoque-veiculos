@@ -31,7 +31,7 @@ O sistema possui serviços de recuperar, cadastrar e deletar relacionados às en
 ### Vendas:
 - **GET /api/vendas**: Lista as vendas cadastradas no sistema;
 - **GET /api/vendas/cliente/{cpf}**: Lista as vendas do cliente identificado pelo `{cpf}`;
-- **GET /api/vendas/periodo?dataFim=&dataInicio=**: Lista as vendas ocorridas entre `{dataInicio}` e `{dataFim}`;
+- **GET /api/vendas/periodo?dataFim=&dataInicio=**: Retorna a soma total do valor em vendas ocorridas entre `{dataInicio}` e `{dataFim}`;
 - **GET /api/vendas/relatoriomodelo?dataFim=&dataInicio=&modelo=&valorMinimo**: Lista as vendas do `{modelo}` ocorridas entre `{dataInicio}` e `{dataFim}` e que tenham `{valorMinimo}`;
 - **GET /api/vendas/veiculo/{modelo}**: Lista as vendas do `{modelo}`;
 - **POST /api/vendas**: Adiciona a venda recebida como parâmetro no sistema;
