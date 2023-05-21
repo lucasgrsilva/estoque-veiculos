@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class RequisicaoNovaVenda {
+    @NotNull(message = "A data da venda deve ser definida")
+    private LocalDate dataDaVenda;
     @NotNull(message = "O preço de venda deve ser definido")
     private BigDecimal precoDeVenda;
     @NotNull(message = "O id do Veículo vendido deve ser definido")
@@ -17,6 +19,10 @@ public class RequisicaoNovaVenda {
     private MetodoDePagamento metodoDePagamento;
     @NotNull(message = "O número de parcelas deve ser definido")
     private int numParcelas;
+
+    public LocalDate getDataDaVenda() {
+        return dataDaVenda;
+    }
 
     public BigDecimal getPrecoDeVenda() {
         return precoDeVenda;
