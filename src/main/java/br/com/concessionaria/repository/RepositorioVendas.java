@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class RepositorioVendas {
@@ -45,14 +46,14 @@ public class RepositorioVendas {
     }
 
     public BigDecimal obterTotalVendasPorPeriodo(LocalDate dataInicio, LocalDate dataFim) {
-        BigDecimal total = BigDecimal.ZERO;
-        for (Venda venda : vendas) {
-            LocalDate dataVenda = venda.getDataDaCompra();
-            if (dataVenda.isAfter(dataInicio.minusDays(1)) && dataVenda.isBefore(dataFim.plusDays(1))) {
-                total = total.add(venda.getPrecoDeVenda());
-            }
-        }
-        return total;
+
+        Predicate<Venda> filtroData = venda -> venda.getDataDaCompra().isAfter(dataInicio.minusDays(1))
+                && venda.getDataDaCompra().isBefore(dataFim.plusDays(1));
+        
+        return vendas.stream()
+                .filter(filtroData)
+                .map(Venda::getPrecoDeVenda)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public List<Venda> getVendasAcimaValorPorPeriodoEModelo(BigDecimal valorMinimo, LocalDate dataInicio, LocalDate dataFim, String nomeModelo) {
