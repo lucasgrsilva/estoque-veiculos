@@ -1,9 +1,9 @@
 # Autores
 Edson Junio Bonfim Pinto, Julio Cesar de Paula Ferreira, Lucas Gabriel Rios da Silva, Vitor Barreto Souza.
 
-# Estoque Veículos
-Este projeto é uma API para controle de estoque de Veículos sem persistência de dados elaborado utilizando o Spring.
-O sistema possui serviços de recuperar, cadastrar e deletar relacionados às entidades Cliente, Veiculo e Venda. Além disso, foi implementado o Controller VeiculosFipe, que possui integração com a API externa [FIPE API HTTP REST](https://deividfortuna.github.io/fipe/)), para recuperar dados de marcas e veículos da tabela FIPE.
+# Sistema de Estoque Veículos
+Este projeto é uma API para controle de estoque de Veículos sem persistência de dados elaborado utilizando o Spring.  
+O sistema possui serviços de recuperar, cadastrar e deletar relacionados às entidades Cliente, Veiculo e Venda. Além disso, foi implementado o Controller VeiculosFipe, que possui integração com a API externa [FIPE API HTTP REST](https://deividfortuna.github.io/fipe/), para recuperar dados de marcas e veículos da tabela FIPE.
 ## Endpoints:
 
 ### Clientes:
@@ -37,14 +37,18 @@ O sistema possui serviços de recuperar, cadastrar e deletar relacionados às en
 - **POST /api/vendas**: Adiciona a venda recebida como parâmetro no sistema;
 - **DELETE /api/vendas/{id}**: Deleta a venda de `{id}` correspondente. Caso não esteja cadastrada, lança uma excessão;
 
+## Tecnologias Utilizadas
+Esse projeto foi implementado utilizando [Spring](https://spring.io/), que é um framework open source para a plataforma Java, que utilizamos para a construção da de Services e Controllers.  
+Além disso, utilizamos a API [FIPE API HTTP REST](https://deividfortuna.github.io/fipe/), que nos permitiu recuperar dados de veículos e marcas da tabela FIPE.
+
 ## Requisitos
 1. IDE IntelliJ
 2. JDK 17
 
 ## Passo a Passo para execução
-1. Abra o projeto no IntelliJ
-2. Certifique-se que a JDK escolhida é a versão 17. Isso pode ser feito indo no menu Run -> Edit Configurations.
-3. Execute o projeto.
+1. Abra o projeto no IntelliJ;
+2. Certifique-se que a JDK escolhida é a versão 17. Isso pode ser feito indo no menu Run -> Edit Configurations;
+3. Execute o projeto;
 4. Acesse os endpoints por meio do link http://localhost:8080/swagger-ui.html#/
 
 ## Estrutura do Projeto
@@ -57,3 +61,4 @@ Dentro desse grupo, estão os packages:
 - **exception:** Contém as excessões elaboradas para o projeto;
 - **repository:** Contém as classes de repositório sem persistência de dados, armazenando os dados em ArrayLists;
 - **service:** Contém as classes de serviço;
+- **util**: Contém a classe `Util`, que implementa métodos de utilidade geral no projeto.
