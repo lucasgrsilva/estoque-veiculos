@@ -73,8 +73,7 @@ public class ServicoVeiculo {
         }
 
         //verificando se placa é única
-        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.getVeiculoPorPlaca(novoCarro.getPlaca());
-        if (veiculoComMesmaPlaca.isPresent()) {
+        if (placaDuplicada(novoCarro)) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
@@ -91,8 +90,7 @@ public class ServicoVeiculo {
         }
 
         //verificando se placa é única
-        Optional<Veiculo> veiculoComMesmaPlaca = repositorioVeiculos.getVeiculoPorPlaca(novaMoto.getPlaca());
-        if (veiculoComMesmaPlaca.isPresent()) {
+        if (placaDuplicada(novaMoto)) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
@@ -107,5 +105,9 @@ public class ServicoVeiculo {
                         .orElseThrow(VeiculoNaoEncontradoException::new);
 
         repositorioVeiculos.removerVeiculo(veiculoEncontrado);
+    }
+
+    public Boolean placaDuplicada(Veiculo veiculo) {
+        return repositorioVeiculos.getVeiculoPorPlaca(veiculo.getPlaca()).isPresent();
     }
 }
