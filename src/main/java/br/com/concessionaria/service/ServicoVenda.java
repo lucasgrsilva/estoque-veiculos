@@ -53,6 +53,11 @@ public class ServicoVenda {
         return repositorioVendas.obterTotalVendasPorPeriodo(dataInicio, dataFim);
     }
 
+    public List<Venda> buscarVendasAcimaValorPorPeriodoEModelo(BigDecimal valorMinimo, LocalDate dataInicio, LocalDate dataFim, String nomeModelo) {
+        List<Venda> vendasEncontradas = repositorioVendas.getVendasAcimaValorPorPeriodoEModelo(valorMinimo, dataInicio, dataFim, nomeModelo);
+        return vendasEncontradas;
+    }
+
     public void deletarVenda(int id) {
         Venda vendaEncontrada = repositorioVendas.getVendaPorId(id)
                 .orElseThrow(VendaNaoEncontradaException::new);

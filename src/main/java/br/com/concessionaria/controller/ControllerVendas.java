@@ -57,6 +57,20 @@ public class ControllerVendas {
         return ResponseEntity.ok(totalVendas);
     }
 
+    @GetMapping("api/vendas/relatoriomodelo")
+    public ResponseEntity<List<VendaResponse>> buscarVendasAcimaValorPorPeriodoEModelo(
+            @RequestParam("valorMinimo") BigDecimal valorMinimo,
+            @RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam("dataFim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim,
+            @RequestParam("modelo") String nomeModelo) {
+        List<Venda> vendasEncontradas = servicoVenda.buscarVendasAcimaValorPorPeriodoEModelo(valorMinimo, dataInicio, dataFim, nomeModelo);
+        List<VendaResponse> vendasResponse = vendasEncontradas.stream()
+                .map(VendaResponse::new)
+                .toList();
+
+        return ResponseEntity.ok(vendasResponse);
+    }
+
     @PostMapping("api/vendas")
     public ResponseEntity<VendaResponse> adicionarVenda(@RequestBody RequisicaoNovaVenda novaVenda) {
         Venda vendaAdicionada = servicoVenda.adicionarVenda(novaVenda);
