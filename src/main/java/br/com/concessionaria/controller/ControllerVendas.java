@@ -4,11 +4,13 @@ import br.com.concessionaria.domain.dto.RequisicaoNovaVenda;
 import br.com.concessionaria.domain.dto.VendaResponse;
 import br.com.concessionaria.domain.entity.Venda;
 import br.com.concessionaria.service.ServicoVenda;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 public class ControllerVendas {
@@ -45,6 +47,14 @@ public class ControllerVendas {
                 .toList();
 
         return ResponseEntity.ok(vendasResponse);
+    }
+
+    @GetMapping("api/vendas/periodo")
+    public ResponseEntity<BigDecimal> getTotalVendasPorPeriodo(
+            @RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
+            @RequestParam("dataFim") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
+        BigDecimal totalVendas = servicoVenda.obterTotalVendasPorPeriodo(dataInicio, dataFim);
+        return ResponseEntity.ok(totalVendas);
     }
 
     @PostMapping("api/vendas")

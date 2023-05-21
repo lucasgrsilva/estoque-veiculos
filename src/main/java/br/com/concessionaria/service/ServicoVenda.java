@@ -6,6 +6,7 @@ import br.com.concessionaria.exception.VendaNaoEncontradaException;
 import br.com.concessionaria.repository.RepositorioVendas;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -46,6 +47,10 @@ public class ServicoVenda {
 
     public List<Venda> buscarVendasPorVeiculo(String modeloVeiculo) {
         return repositorioVendas.getVendasPorVeiculo(modeloVeiculo);
+    }
+
+    public BigDecimal obterTotalVendasPorPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+        return repositorioVendas.obterTotalVendasPorPeriodo(dataInicio, dataFim);
     }
 
     public void deletarVenda(int id) {

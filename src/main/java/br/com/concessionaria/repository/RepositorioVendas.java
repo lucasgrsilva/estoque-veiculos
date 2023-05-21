@@ -2,6 +2,8 @@ package br.com.concessionaria.repository;
 
 import br.com.concessionaria.domain.entity.Venda;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +41,17 @@ public class RepositorioVendas {
             }
         }
         return vendas;
+    }
+
+    public BigDecimal obterTotalVendasPorPeriodo(LocalDate dataInicio, LocalDate dataFim) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Venda venda : vendas) {
+            LocalDate dataVenda = venda.getDataDaCompra();
+            if (dataVenda.isAfter(dataInicio) && dataVenda.isBefore(dataFim)) {
+                total = total.add(venda.getPrecoDeVenda());
+            }
+        }
+        return total;
     }
 
     public Optional<Venda> getVendaPorId(int id) {
