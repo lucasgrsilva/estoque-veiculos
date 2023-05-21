@@ -3,13 +3,8 @@ package br.com.concessionaria.service;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpClient;
-import java.io.IOException;
-import java.util.List;
+
 
 import br.com.concessionaria.domain.dto.DetalhesModeloApiResponse;
 import br.com.concessionaria.domain.dto.MarcaApiResponse;

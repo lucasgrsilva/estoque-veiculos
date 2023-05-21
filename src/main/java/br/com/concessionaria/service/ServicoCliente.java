@@ -22,7 +22,7 @@ public class ServicoCliente {
                 "Belo Horizonte" );
 
         Cliente cliente1 = new Cliente(1, "Anderson", "123456789", endereco1, "56987548596");
-        Cliente cliente2 = new Cliente(2, "Luana", "924456789", endereco1, "18924548596");
+        Cliente cliente2 = new Cliente(2, "Luana", "924456789", endereco2, "18924548596");
 
         repositorioClientes.adicionarCliente(cliente1);
         repositorioClientes.adicionarCliente(cliente2);
