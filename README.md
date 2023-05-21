@@ -1,5 +1,5 @@
 # Autores
-Edson Junio Bonfim Pinto, Julio Cesar de Paula Ferreira, Lucas Gabriel Rios da Silva
+Edson Junio Bonfim Pinto, Julio Cesar de Paula Ferreira, Lucas Gabriel Rios da Silva, Vitor Barreto Souza.
 
 # Estoque Veículos
 Este projeto é uma API para controle de estoque de Veículos sem persistência de dados elaborado utilizando o Spring.
