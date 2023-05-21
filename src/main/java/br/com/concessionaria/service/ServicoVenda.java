@@ -29,7 +29,7 @@ public class ServicoVenda {
 
         int idNovaVenda = repositorioVendas.getProximoId();
 
-        Venda venda = new Venda(idNovaVenda, LocalDate.now(), novaVenda.getPrecoDeVenda(), veiculo, cliente,
+        Venda venda = new Venda(idNovaVenda, novaVenda.getDataDaVenda(), novaVenda.getPrecoDeVenda(), veiculo, cliente,
                 novaVenda.getMetodoDePagamento(), novaVenda.getNumParcelas());
 
         repositorioVendas.adicionarVenda(venda);
