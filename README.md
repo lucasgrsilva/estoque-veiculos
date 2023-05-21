@@ -1,3 +1,6 @@
+# Autores
+Edson Junio Bonfim Pinto, Julio Cesar de Paula Ferreira, Lucas Gabriel Rios da Silva
+
 # Estoque Veículos
 Este projeto é uma API para controle de estoque de Veículos sem persistência de dados elaborado utilizando o Spring.
 O sistema possui serviços de recuperar, cadastrar e deletar relacionados às entidades Cliente, Veiculo e Venda. Além disso, foi implementado o Controller VeiculosFipe, que possui integração com a API externa [FIPE API HTTP REST](https://deividfortuna.github.io/fipe/)), para recuperar dados de marcas e veículos da tabela FIPE.
@@ -33,9 +36,6 @@ O sistema possui serviços de recuperar, cadastrar e deletar relacionados às en
 - **GET /api/vendas/veiculo/{modelo}**: Lista as vendas do `{modelo}`;
 - **POST /api/vendas**: Adiciona a venda recebida como parâmetro no sistema;
 - **DELETE /api/vendas/{id}**: Deleta a venda de `{id}` correspondente. Caso não esteja cadastrada, lança uma excessão;
-
-# Grupo
-Edson Junio Bonfim Pinto, Julio Cesar de Paula Ferreira, Lucas Gabriel Rios da Silva
 
 ## Requisitos
 1. IDE IntelliJ
