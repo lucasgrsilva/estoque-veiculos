@@ -20,28 +20,20 @@ public class ServicoFipe {
 
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas", tipoVeiculo);
 
-        URL url = new URL(basePath);
-        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-        BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
-        String jsonEmString = Util.converteJsonEmString(resposta);
+        String response = RequestBuilder(basePath);
 
         Gson gson = new Gson();
-        MarcaApiResponse marcaApiResponse[] = gson.fromJson(jsonEmString, MarcaApiResponse[].class);
-        return marcaApiResponse;
+        return gson.fromJson(response, MarcaApiResponse[].class);
     }
 
     public ModeloApiResponse buscarModelosPorMarca(TipoVeiculo tipoVeiculo, String codMarca) throws Exception{
 
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas/%s/modelos", tipoVeiculo, codMarca);
 
-        URL url = new URL(basePath);
-        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-        BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
-        String jsonEmString = Util.converteJsonEmString(resposta);
+        String response = RequestBuilder(basePath);
 
         Gson gson = new Gson();
-        ModeloApiResponse modeloApiResponse = gson.fromJson(jsonEmString, ModeloApiResponse.class);
-        return modeloApiResponse;
+        return gson.fromJson(response, ModeloApiResponse.class);
     }
 
     public DetalhesModeloApiResponse buscarModelo(TipoVeiculo tipoVeiculo, String codMarca, String codModelo, String ano) throws Exception{
@@ -49,14 +41,16 @@ public class ServicoFipe {
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas/%s/modelos/%s/anos/%s-3",
                 tipoVeiculo, codMarca, codModelo, ano);
 
-        URL url = new URL(basePath);
-        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-        BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
-        String jsonEmString = Util.converteJsonEmString(resposta);
+        String response = RequestBuilder(basePath);
 
         Gson gson = new Gson();
-        DetalhesModeloApiResponse modeloApiResponse = gson.fromJson(jsonEmString, DetalhesModeloApiResponse.class);
-        return modeloApiResponse;
+        return gson.fromJson(response, DetalhesModeloApiResponse.class);
     }
 
+    private static String RequestBuilder(String uri) throws Exception {
+        URL url = new URL(uri);
+        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+        BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
+        return Util.converteJsonEmString(resposta);
+    }
 }
