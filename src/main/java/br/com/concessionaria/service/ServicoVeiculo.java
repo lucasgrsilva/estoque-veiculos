@@ -67,8 +67,7 @@ public class ServicoVeiculo {
 
     public Carro adicionarCarro(Carro novoCarro) {
         //verificando se chassi é único
-        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.getVeiculoPorChassi(novoCarro.getChassi());
-        if (veiculoComMesmoChassi.isPresent()) {
+        if (chassiDuplicado(novoCarro)) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
@@ -84,8 +83,7 @@ public class ServicoVeiculo {
     }
     public Moto adicionarMoto(Moto novaMoto) {
         //verificando se chassi é único
-        Optional<Veiculo> veiculoComMesmoChassi = repositorioVeiculos.getVeiculoPorChassi(novaMoto.getChassi());
-        if (veiculoComMesmoChassi.isPresent()) {
+        if (chassiDuplicado(novaMoto)) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
@@ -105,6 +103,10 @@ public class ServicoVeiculo {
                         .orElseThrow(VeiculoNaoEncontradoException::new);
 
         repositorioVeiculos.removerVeiculo(veiculoEncontrado);
+    }
+
+    public Boolean chassiDuplicado(Veiculo veiculo) {
+        return repositorioVeiculos.getVeiculoPorChassi(veiculo.getChassi()).isPresent();
     }
 
     public Boolean placaDuplicada(Veiculo veiculo) {
