@@ -17,10 +17,10 @@ public class ServicoVeiculo {
 
     public ServicoVeiculo() {
         Carro carro1 = new Carro(1, 123, "abc1234", "Cruze", 180,
-                BigDecimal.valueOf(1000), 1, 16, MarcasCarro.Chevrolet, 2020,
+                BigDecimal.valueOf(1000), true, 16, MarcasCarro.Chevrolet, 2020,
                 LocalDate.parse("2020-06-02"), BigDecimal.valueOf(68000), BigDecimal.valueOf(85000));
         Carro carro2 = new Carro(2, 321, "abc2345", "Civic", 180,
-                BigDecimal.valueOf(1000), 1, 16, MarcasCarro.Honda, 2019,
+                BigDecimal.valueOf(1000), true, 16, MarcasCarro.Honda, 2019,
                 LocalDate.parse("2020-07-02"), BigDecimal.valueOf(65000), BigDecimal.valueOf(75000));
         Moto moto1 = new Moto(3, 234, "abc3456", "PCX", 149, 12,
                 MarcasMoto.Honda, 2019, LocalDate.parse("2021-05-08"), BigDecimal.valueOf(9000),
