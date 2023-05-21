@@ -26,8 +26,7 @@ public class ServicoFipe {
         String jsonEmString = Util.converteJsonEmString(resposta);
 
         Gson gson = new Gson();
-        MarcaApiResponse marcaApiResponse[] = gson.fromJson(jsonEmString, MarcaApiResponse[].class);
-        return marcaApiResponse;
+        return gson.fromJson(jsonEmString, MarcaApiResponse[].class);
     }
 
     public ModeloApiResponse buscarModelosPorMarca(TipoVeiculo tipoVeiculo, String codMarca) throws Exception{
@@ -40,8 +39,7 @@ public class ServicoFipe {
         String jsonEmString = Util.converteJsonEmString(resposta);
 
         Gson gson = new Gson();
-        ModeloApiResponse modeloApiResponse = gson.fromJson(jsonEmString, ModeloApiResponse.class);
-        return modeloApiResponse;
+        return gson.fromJson(jsonEmString, ModeloApiResponse.class);
     }
 
     public DetalhesModeloApiResponse buscarModelo(TipoVeiculo tipoVeiculo, String codMarca, String codModelo, String ano) throws Exception{
@@ -55,8 +53,8 @@ public class ServicoFipe {
         String jsonEmString = Util.converteJsonEmString(resposta);
 
         Gson gson = new Gson();
-        DetalhesModeloApiResponse modeloApiResponse = gson.fromJson(jsonEmString, DetalhesModeloApiResponse.class);
-        return modeloApiResponse;
+        return gson.fromJson(jsonEmString, DetalhesModeloApiResponse.class);
     }
+
 
 }
