@@ -20,7 +20,7 @@ public class ServicoFipe {
 
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas", tipoVeiculo);
 
-        String response = RequestBuilder(basePath);
+        String response = requestBuilder(basePath);
 
         Gson gson = new Gson();
         return gson.fromJson(response, MarcaApiResponse[].class);
@@ -30,7 +30,7 @@ public class ServicoFipe {
 
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas/%s/modelos", tipoVeiculo, codMarca);
 
-        String response = RequestBuilder(basePath);
+        String response = requestBuilder(basePath);
 
         Gson gson = new Gson();
         return gson.fromJson(response, ModeloApiResponse.class);
@@ -41,13 +41,13 @@ public class ServicoFipe {
         String basePath = String.format("https://parallelum.com.br/fipe/api/v1/%s/marcas/%s/modelos/%s/anos/%s-3",
                 tipoVeiculo, codMarca, codModelo, ano);
 
-        String response = RequestBuilder(basePath);
+        String response = requestBuilder(basePath);
 
         Gson gson = new Gson();
         return gson.fromJson(response, DetalhesModeloApiResponse.class);
     }
 
-    private static String RequestBuilder(String uri) throws Exception {
+    private String requestBuilder(String uri) throws Exception {
         URL url = new URL(uri);
         HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
         BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
