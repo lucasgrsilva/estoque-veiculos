@@ -1,5 +1,6 @@
 package br.com.concessionaria.integracao;
 
+import br.com.concessionaria.domain.dto.DetalhesModeloApiResponse;
 import br.com.concessionaria.domain.dto.MarcaApiResponse;
 import br.com.concessionaria.domain.dto.ModeloAnosApiResponse;
 import br.com.concessionaria.domain.dto.ModeloApiResponse;
@@ -61,4 +62,28 @@ public class ServicoFipeTests {
 
         assertEquals("Dados de marca ou veículo inválidos", excecaoLancada.getMessage());
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"carros, 59, 5940, 2014-3", "motos, 80, 10610, 2023-1"})
+    public void quandoBuscarModelo_PassandoTipoVeiculoEcodigoMarcaEcodigoVeiculoEanoValidos_DeveRetornarModelo(
+            TipoVeiculo tipoVeiculo, String codMarca, String codModelo, String ano) throws Exception {
+        //Act
+        DetalhesModeloApiResponse modelo = servicoFipe.buscarModelo(tipoVeiculo, codMarca, codModelo, ano);
+
+        //Assert
+        assertNotNull(modelo);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"carros, 8888, 5940, 2014-3", "motos, 8888, 10610, 2023-1", "carros, 59, 88888, 2014-3",
+            "motos, 80, 88888, 2023-1", "carros, 80, 5940, 00000", "motos, 80, 10610, 00000"})
+    public void quandoBuscarModelo_PassandoInformacoesNaoExistentesNoServidor_DeveLancarExcecao(
+            TipoVeiculo tipoVeiculo, String codMarca, String codModelo, String ano) throws Exception {
+
+        RequisicaoInvalidaException excecaoLancada = assertThrows(RequisicaoInvalidaException.class,
+                () -> servicoFipe.buscarModelo(tipoVeiculo, codMarca, codModelo, ano));
+
+        assertEquals("Dados de marca ou veículo inválidos", excecaoLancada.getMessage());
+    }
+
 }
