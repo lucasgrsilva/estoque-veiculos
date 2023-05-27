@@ -10,6 +10,7 @@ import br.com.concessionaria.domain.dto.DetalhesModeloApiResponse;
 import br.com.concessionaria.domain.dto.MarcaApiResponse;
 import br.com.concessionaria.domain.dto.ModeloApiResponse;
 import br.com.concessionaria.domain.entity.TipoVeiculo;
+import br.com.concessionaria.exception.RequisicaoInvalidaException;
 import br.com.concessionaria.util.Util;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
@@ -49,8 +50,14 @@ public class ServicoFipe {
 
     private String requestBuilder(String uri) throws Exception {
         URL url = new URL(uri);
-        HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
-        BufferedReader resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
+        BufferedReader resposta;
+        try {
+            HttpURLConnection conexao = (HttpURLConnection) url.openConnection();
+            resposta = new BufferedReader(new InputStreamReader((conexao.getInputStream())));
+        }
+        catch(Exception exception) {
+            throw new RequisicaoInvalidaException();
+        }
         return Util.converteJsonEmString(resposta);
     }
 }
