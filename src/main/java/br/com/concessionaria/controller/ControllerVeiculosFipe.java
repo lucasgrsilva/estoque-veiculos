@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 public class ControllerVeiculosFipe {
     private final ServicoFipe servicoFipe;
@@ -19,9 +21,9 @@ public class ControllerVeiculosFipe {
     }
 
     @GetMapping("api/veiculos/fipe/{tipoVeiculo}/marcas")
-    public ResponseEntity<MarcaApiResponse[]> listarVeiculosFipe(@PathVariable TipoVeiculo tipoVeiculo)
+    public ResponseEntity<List<MarcaApiResponse>> listarVeiculosFipe(@PathVariable TipoVeiculo tipoVeiculo)
             throws Exception {
-        return ResponseEntity.ok(servicoFipe.buscarFipe(tipoVeiculo));
+        return ResponseEntity.ok(servicoFipe.buscarMarcasFipe(tipoVeiculo));
     }
 
     @GetMapping("api/veiculos/fipe/{tipoVeiculo}/marcas/{codMarca}")
