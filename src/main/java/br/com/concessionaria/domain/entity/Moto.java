@@ -26,6 +26,10 @@ public class Moto extends Veiculo {
             this.dataDeEntradaEstoque = dataDeEntradaEstoque;
         }
 
+    public Moto() {
+        super();
+    }
+
 	public int getCilindradaEmCc() {
 		return cilindradaEmCc;
 	}

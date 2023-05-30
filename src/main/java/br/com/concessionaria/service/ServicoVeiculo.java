@@ -13,9 +13,10 @@ import java.util.Optional;
 
 @Service
 public class ServicoVeiculo {
-    private final RepositorioVeiculos repositorioVeiculos = new RepositorioVeiculos();
+    private final RepositorioVeiculos repositorioVeiculos;
 
-    public ServicoVeiculo() {
+    public ServicoVeiculo(RepositorioVeiculos repositorioVeiculos) {
+        this.repositorioVeiculos = repositorioVeiculos;
         Carro carro1 = new Carro(1, 123, "abc1234", "Cruze", 180,
                 BigDecimal.valueOf(1000), true, 16, MarcasCarro.Chevrolet, 2020,
                 LocalDate.parse("2020-06-02"), BigDecimal.valueOf(68000), BigDecimal.valueOf(85000));

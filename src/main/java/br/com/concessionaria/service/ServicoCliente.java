@@ -13,9 +13,11 @@ import java.util.Optional;
 
 @Service
 public class ServicoCliente {
-    private final RepositorioClientes repositorioClientes = new RepositorioClientes();
+    private final RepositorioClientes repositorioClientes;
 
-    public ServicoCliente() {
+    public ServicoCliente(RepositorioClientes repositorioClientes) {
+        this.repositorioClientes = repositorioClientes;
+
         Endereco endereco1 = new Endereco("Rua dos Partidos", 12, "Goiânia", "12356789", "MG",
                 "Belo Horizonte" );
         Endereco endereco2 = new Endereco("Rua dos Partidos", 22, "Goiânia", "12356789", "MG",

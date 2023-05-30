@@ -1,11 +1,15 @@
 package br.com.concessionaria.repository;
 
 import br.com.concessionaria.domain.entity.Cliente;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class RepositorioClientes {
     private static final List<Cliente> clientes = new ArrayList<>();
 

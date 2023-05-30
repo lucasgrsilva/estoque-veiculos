@@ -1,6 +1,7 @@
 package br.com.concessionaria.repository;
 
 import br.com.concessionaria.domain.entity.Venda;
+import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Repository
 public class RepositorioVendas {
     private static final List<Venda> vendas = new ArrayList<>();
 

@@ -12,10 +12,11 @@ import java.util.List;
 
 @Service
 public class ServicoVenda {
-    private final RepositorioVendas repositorioVendas = new RepositorioVendas();
+    private final RepositorioVendas repositorioVendas;
     private final ServicoVeiculo servicoVeiculo;
     private final ServicoCliente servicoCliente;
-    public ServicoVenda(ServicoVeiculo servicoVeiculo, ServicoCliente servicoCliente) {
+    public ServicoVenda(RepositorioVendas repositorioVendas, ServicoVeiculo servicoVeiculo, ServicoCliente servicoCliente) {
+        this.repositorioVendas = repositorioVendas;
         this.servicoVeiculo = servicoVeiculo;
         this.servicoCliente = servicoCliente;
     }

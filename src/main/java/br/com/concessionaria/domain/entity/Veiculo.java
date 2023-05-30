@@ -30,7 +30,11 @@ public abstract class Veiculo {
             this.valorComprado = valorComprado;
         }
 
-	public int getId() {
+    public Veiculo() {
+
+    }
+
+    public int getId() {
 		return id;
 	}
 

@@ -32,6 +32,10 @@ public class Carro extends Veiculo {
             this.marca = marca;
 	}
 
+	public Carro() {
+        super();
+    }
+
 	public int getCavalosPotencia() {
 		return cavalosPotencia;
 	}
