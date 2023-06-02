@@ -15,4 +15,4 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
       - name: Run the Maven verify phase
-        run: mvn --batch-mode --update-snapshots verify
+        run: mvn -B test
