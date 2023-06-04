@@ -1,0 +1,20 @@
+component_management:
+  individual_components:
+    - component_id: "Veiculos"
+      paths:
+        - "src/main/java/br/com/concessionaria/service/ServicoVeiculo.java"
+        - "src/main/java/br/com/concessionaria/repository/RepositorioVeiculos.java"
+        - "src/main/java/br/com/concessionaria/controller/ControllerVeiculos.java"
+    - component_id: "Clientes"
+      paths:
+        - "src/main/java/br/com/concessionaria/service/ServicoCliente.java"
+        - "src/main/java/br/com/concessionaria/repository/RepositorioClientes.java"
+        - "src/main/java/br/com/concessionaria/controller/ControllerClientes.java"
+    - component_id: "Vendas"
+      paths:
+        - "src/main/java/br/com/concessionaria/service/ServicoVenda.java"
+        - "src/main/java/br/com/concessionaria/repository/RepositorioVendas.java"
+        - "src/main/java/br/com/concessionaria/controller/ControllerVendas.java"
+
+comment:
+  layout: "header, diff, flags, components"

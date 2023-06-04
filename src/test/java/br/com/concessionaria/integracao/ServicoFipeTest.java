@@ -7,7 +7,6 @@ import br.com.concessionaria.domain.dto.ModeloApiResponse;
 import br.com.concessionaria.domain.entity.TipoVeiculo;
 import br.com.concessionaria.exception.RequisicaoInvalidaException;
 import br.com.concessionaria.service.ServicoFipe;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -18,7 +17,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ServicoFipeTests {
+public class ServicoFipeTest {
 
     private ServicoFipe servicoFipe;
 
