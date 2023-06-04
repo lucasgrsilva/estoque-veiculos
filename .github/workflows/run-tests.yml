@@ -16,14 +16,14 @@ jobs:
           distribution: 'zulu'
 
       - name: Run Unit Tests
-        run: mvn verify -Dtest=br.com.concessionaria.unidade.*Test
+        run: mvn --batch-mode --update-snapshots verify -Dtest=br.com.concessionaria.unidade.*Test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           flags: unidade
 
       - name: Run Integration Tests
-        run: mvn verify -Dtest=br.com.concessionaria.integracao.*Test
+        run: mvn --batch-mode --update-snapshots verify -Dtest=br.com.concessionaria.integracao.*Test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
