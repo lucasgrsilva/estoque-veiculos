@@ -20,6 +20,15 @@ public class RequisicaoNovaVenda {
     @NotNull(message = "O número de parcelas deve ser definido")
     private int numParcelas;
 
+    public RequisicaoNovaVenda(LocalDate dataDaVenda, BigDecimal precoDeVenda, int idVeiculo, int idCliente, MetodoDePagamento metodoDePagamento, int numParcelas) {
+        this.dataDaVenda = dataDaVenda;
+        this.precoDeVenda = precoDeVenda;
+        this.idVeiculo = idVeiculo;
+        this.idCliente = idCliente;
+        this.metodoDePagamento = metodoDePagamento;
+        this.numParcelas = numParcelas;
+    }
+
     public LocalDate getDataDaVenda() {
         return dataDaVenda;
     }
