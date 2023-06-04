@@ -14,7 +14,17 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
-      - name: Build Maven and Run Tests
-        run: mvn --batch-mode --update-snapshots verify
+
+      - name: Run Unit Tests
+        run: mvn verify -Dtest=br.com.concessionaria.unidade.*Test
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          flags: unidade
+
+      - name: Run Integration Tests
+        run: mvn verify -Dtest=br.com.concessionaria.integracao.*Test
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          flags: integracao
