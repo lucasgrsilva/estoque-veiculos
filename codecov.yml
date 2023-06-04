@@ -18,3 +18,4 @@ component_management:
 
 comment:
   layout: "header, diff, flags, components"
+  require_changes: false
