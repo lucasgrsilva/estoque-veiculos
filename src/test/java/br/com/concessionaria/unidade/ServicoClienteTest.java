@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 public class ServicoClienteTest {
     @Mock
     RepositorioClientes repositorioClientes;
@@ -35,6 +34,8 @@ public class ServicoClienteTest {
 
     @BeforeEach
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
+
         endereco = new Endereco("Rua A", 10, "Federal", "12.345-678", "MG", "Contagem");
     }
 
