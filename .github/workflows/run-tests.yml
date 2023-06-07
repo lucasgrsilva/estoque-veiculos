@@ -15,18 +15,6 @@ jobs:
 
       - name: Run Unit Tests
         run: mvn --batch-mode --update-snapshots verify "-Dtest=br.com.concessionaria.unidade.*Test"
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: target/site/jacoco/jacoco.xml
-          flags: unidade
 
       - name: Run Integration Tests
         run: mvn --batch-mode --update-snapshots verify "-Dtest=br.com.concessionaria.integracao.*Test"
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          files: target/site/jacoco/jacoco.xml
-          flags: integracao
