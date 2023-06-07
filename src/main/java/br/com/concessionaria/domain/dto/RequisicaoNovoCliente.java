@@ -15,6 +15,13 @@ public class RequisicaoNovoCliente {
     @NotEmpty(message = "O CPF do cliente deve ser definido")
     private String cpf;
 
+    public RequisicaoNovoCliente(String nome, String telefone, Endereco endereco, String cpf) {
+        this.nome = nome;
+        this.telefone = telefone;
+        this.endereco = endereco;
+        this.cpf = cpf;
+    }
+
     public String getNome() {
         return nome;
     }
