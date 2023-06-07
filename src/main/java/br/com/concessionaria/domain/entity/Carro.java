@@ -56,7 +56,7 @@ public class Carro extends Veiculo {
 		return isTurbo;
 	}
 
-	public void setIsTurbo(Boolean isTurbo) {
+	public void setTurbo(Boolean isTurbo) {
 		this.isTurbo = isTurbo;
 	}
 
