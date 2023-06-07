@@ -1,7 +1,10 @@
 package br.com.concessionaria.domain.entity;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@JsonTypeInfo(use= JsonTypeInfo.Id.CLASS, include= JsonTypeInfo.As.PROPERTY, property= "@class")
 public abstract class Veiculo {
     protected int id;
     protected int chassi;
