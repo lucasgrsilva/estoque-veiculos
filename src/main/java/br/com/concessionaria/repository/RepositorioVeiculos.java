@@ -3,6 +3,7 @@ package br.com.concessionaria.repository;
 import br.com.concessionaria.domain.entity.*;
 import org.springframework.stereotype.Repository;
 
+import javax.annotation.PreDestroy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,11 @@ import java.util.Optional;
 @Repository
 public class RepositorioVeiculos {
     private static final List<Veiculo> veiculos = new ArrayList<>();
+
+    @PreDestroy
+    public void preDestroy() {
+        veiculos.clear();
+    }
 
     public void adicionarVeiculo(Veiculo veiculo) {
         veiculos.add(veiculo);
