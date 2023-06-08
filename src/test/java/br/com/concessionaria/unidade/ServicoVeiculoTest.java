@@ -1,5 +1,7 @@
 package br.com.concessionaria.unidade;
 
+import br.com.concessionaria.domain.dto.RequisicaoNovaMoto;
+import br.com.concessionaria.domain.dto.RequisicaoNovoCarro;
 import br.com.concessionaria.domain.entity.*;
 import br.com.concessionaria.exception.VeiculoInvalidoException;
 import br.com.concessionaria.repository.RepositorioVeiculos;
@@ -15,10 +17,11 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.*;
 
 public class ServicoVeiculoTest
 {
@@ -52,25 +55,27 @@ public class ServicoVeiculoTest
     @Test
     public void quandoTentarAdicionarCarro_PassandoCarroComChassiEplacaUnicos_DeveSalvarEretornarVeiculo() {
         //Arrange
-        Carro novoCarro = new Carro(0, 123, "abc1234", "Cruze", 180,
-                BigDecimal.valueOf(1000), true, 16, MarcasCarro.Chevrolet, 2020,
-                LocalDate.parse("2020-06-02"), BigDecimal.valueOf(68000), BigDecimal.valueOf(85000));
+        RequisicaoNovoCarro requisicao = new RequisicaoNovoCarro(123, "abc1234", "Cruze", 2020,
+                LocalDate.parse("2020-06-02"), BigDecimal.valueOf(68000), BigDecimal.valueOf(85000), 180,
+                BigDecimal.valueOf(800), true, 25,MarcasCarro.Chevrolet);
 
         int proximoId = 1;
 
         when(repositorioVeiculos.getProximoId()).thenReturn(proximoId);
 
         //Act
-        Carro carroSalvo = servicoVeiculo.adicionarCarro(novoCarro);
+        Carro carroSalvo = servicoVeiculo.adicionarCarro(requisicao);
 
         //Assert
-        verify(repositorioVeiculos).adicionarVeiculo(novoCarro);
-        assertEquals(carroSalvo, novoCarro);
+        verify(repositorioVeiculos, times(5)).adicionarVeiculo(any(Veiculo.class));
+        assertThat(requisicao)
+                .usingRecursiveComparison()
+                        .isEqualTo(carroSalvo);
     }
 
     @Test
     public void quandoTentarAdicionarCarro_PassandoCarroComChassiDuplicado_DeveLancarExcecao() {
-        Carro carroComChassiDuplicado = new Carro();
+        RequisicaoNovoCarro carroComChassiDuplicado = new RequisicaoNovoCarro();
         carroComChassiDuplicado.setChassi(123);
 
         when(repositorioVeiculos.getVeiculoPorChassi(carroComChassiDuplicado.getChassi()))
@@ -85,7 +90,7 @@ public class ServicoVeiculoTest
 
     @Test
     public void quandoTentarAdicionarCarro_PassandoCarroComPlacaDuplicada_DeveLancarExcecao() {
-        Carro carroComPlacaDuplicada = new Carro();
+        RequisicaoNovoCarro carroComPlacaDuplicada = new RequisicaoNovoCarro();
         carroComPlacaDuplicada.setChassi(123);
         carroComPlacaDuplicada.setPlaca("adc1235");
 

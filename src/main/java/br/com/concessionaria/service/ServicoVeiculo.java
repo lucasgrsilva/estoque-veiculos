@@ -1,5 +1,8 @@
 package br.com.concessionaria.service;
 
+import br.com.concessionaria.domain.dto.RequisicaoNovaMoto;
+import br.com.concessionaria.domain.dto.RequisicaoNovoCarro;
+import br.com.concessionaria.domain.dto.RequisicaoNovoVeiculo;
 import br.com.concessionaria.domain.entity.*;
 import br.com.concessionaria.exception.VeiculoInvalidoException;
 import br.com.concessionaria.exception.VeiculoNaoEncontradoException;
@@ -9,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ServicoVeiculo {
@@ -66,34 +68,60 @@ public class ServicoVeiculo {
         return repositorioVeiculos.getVeiculosPorAnoFabricação(anoMinimo, anoMaximo);
     }
 
-    public Carro adicionarCarro(Carro novoCarro) {
+    public Carro adicionarCarro(RequisicaoNovoCarro requisicao) {
         //verificando se chassi é único
-        if (chassiDuplicado(novoCarro)) {
+        if (chassiDuplicado(requisicao)) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
         //verificando se placa é única
-        if (placaDuplicada(novoCarro)) {
+        if (placaDuplicada(requisicao)) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
-        novoCarro.setId(repositorioVeiculos.getProximoId());
+        Carro novoCarro = new Carro(
+                repositorioVeiculos.getProximoId(),
+                requisicao.getChassi(),
+                requisicao.getPlaca(),
+                requisicao.getModelo(),
+                requisicao.getCavalosPotencia(),
+                requisicao.getCilindradaEmLitro(),
+                requisicao.isTurbo(),
+                requisicao.getTipoRodas(),
+                requisicao.getMarca(),
+                requisicao.getAnoFabricacao(),
+                requisicao.getDataDeEntradaEstoque(),
+                requisicao.getValorFipe(),
+                requisicao.getValorComprado());
+
         repositorioVeiculos.adicionarVeiculo(novoCarro);
 
         return novoCarro;
     }
-    public Moto adicionarMoto(Moto novaMoto) {
+    public Moto adicionarMoto(RequisicaoNovaMoto requisicao) {
         //verificando se chassi é único
-        if (chassiDuplicado(novaMoto)) {
+        if (chassiDuplicado(requisicao)) {
             throw new VeiculoInvalidoException("Chassi duplicado");
         }
 
         //verificando se placa é única
-        if (placaDuplicada(novaMoto)) {
+        if (placaDuplicada(requisicao)) {
             throw new VeiculoInvalidoException("Placa duplicada");
         }
 
-        novaMoto.setId(repositorioVeiculos.getProximoId());
+        Moto novaMoto = new Moto(
+                repositorioVeiculos.getProximoId(),
+                requisicao.getChassi(),
+                requisicao.getPlaca(),
+                requisicao.getModelo(),
+                requisicao.getCilindradaEmCc(),
+                requisicao.getAroDasRodas(),
+                requisicao.getMarca(),
+                requisicao.getAnoFabricacao(),
+                requisicao.getDataDeEntradaEstoque(),
+                requisicao.getValorFipe(),
+                requisicao.getValorComprado());
+
         repositorioVeiculos.adicionarVeiculo(novaMoto);
 
         return novaMoto;
@@ -106,11 +134,11 @@ public class ServicoVeiculo {
         repositorioVeiculos.removerVeiculo(veiculoEncontrado);
     }
 
-    public Boolean chassiDuplicado(Veiculo veiculo) {
+    public Boolean chassiDuplicado(RequisicaoNovoVeiculo veiculo) {
         return repositorioVeiculos.getVeiculoPorChassi(veiculo.getChassi()).isPresent();
     }
 
-    public Boolean placaDuplicada(Veiculo veiculo) {
+    public Boolean placaDuplicada(RequisicaoNovoVeiculo veiculo) {
         return repositorioVeiculos.getVeiculoPorPlaca(veiculo.getPlaca()).isPresent();
     }
 }

@@ -1,16 +1,12 @@
 package br.com.concessionaria.domain.entity;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@JsonTypeName("carro")
 public class Carro extends Veiculo {
     private int cavalosPotencia;
     private BigDecimal cilindradaEmLitro;
-    private Boolean isTurbo;
+    private Boolean turbo;
     private int tipoRodas;
     private MarcasCarro marca;
 
@@ -20,7 +16,7 @@ public class Carro extends Veiculo {
         final String modelo,
         final int cavalosPotencia,
         final BigDecimal cilindradaEmLitro,
-        final Boolean isTurbo,
+        final Boolean turbo,
         final int tipoRodas,
         final MarcasCarro marca,
         final int anoFabricacao,
@@ -31,7 +27,7 @@ public class Carro extends Veiculo {
     		super(id,chassi,placa,modelo,anoFabricacao,dataDeEntradaEstoque,valorFipe,valorComprado);
             this.cavalosPotencia = cavalosPotencia;
             this.cilindradaEmLitro = cilindradaEmLitro;
-            this.isTurbo = isTurbo;
+            this.turbo = turbo;
             this.tipoRodas = tipoRodas;
             this.marca = marca;
 	}
@@ -55,11 +51,11 @@ public class Carro extends Veiculo {
 	}
 
 	public Boolean isTurbo() {
-		return isTurbo;
+		return turbo;
 	}
 
 	public void setTurbo(Boolean isTurbo) {
-		this.isTurbo = isTurbo;
+		this.turbo = isTurbo;
 	}
 
 	public int getTipoRodas() {
