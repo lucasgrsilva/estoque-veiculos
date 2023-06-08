@@ -13,8 +13,5 @@ jobs:
           java-version: '17'
           distribution: 'zulu'
 
-      - name: Run Unit Tests
-        run: mvn --batch-mode --update-snapshots verify "-Dtest=br.com.concessionaria.unidade.*Test"
-
-      - name: Run Integration Tests
-        run: mvn --batch-mode --update-snapshots verify "-Dtest=br.com.concessionaria.integracao.*Test"
+      - name: Run Tests
+        run: mvn --batch-mode --update-snapshots verify
