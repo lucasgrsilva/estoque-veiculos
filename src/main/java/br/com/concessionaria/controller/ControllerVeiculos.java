@@ -1,5 +1,7 @@
 package br.com.concessionaria.controller;
 
+import br.com.concessionaria.domain.dto.RequisicaoNovaMoto;
+import br.com.concessionaria.domain.dto.RequisicaoNovoCarro;
 import br.com.concessionaria.domain.entity.*;
 import br.com.concessionaria.service.ServicoVeiculo;
 import org.springframework.http.ResponseEntity;
@@ -54,15 +56,15 @@ public class ControllerVeiculos {
     }
 
     @PostMapping("api/veiculos/carros")
-    public ResponseEntity<Carro> adicionarCarro(@RequestBody Carro novoCarro) {
-        Carro carroSalvo = servicoVeiculo.adicionarCarro(novoCarro);
+    public ResponseEntity<Carro> adicionarCarro(@RequestBody RequisicaoNovoCarro requisicao) {
+        Carro carroSalvo = servicoVeiculo.adicionarCarro(requisicao);
 
         return ResponseEntity.ok(carroSalvo);
     }
 
     @PostMapping("api/veiculos/motos")
-    public ResponseEntity<Moto> adicionarMoto(@RequestBody Moto novaMoto) {
-        Moto motoSalva = servicoVeiculo.adicionarMoto(novaMoto);
+    public ResponseEntity<Moto> adicionarMoto(@RequestBody RequisicaoNovaMoto requisicao) {
+        Moto motoSalva = servicoVeiculo.adicionarMoto(requisicao);
 
         return ResponseEntity.ok(motoSalva);
     }

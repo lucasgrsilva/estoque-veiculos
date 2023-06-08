@@ -1,5 +1,9 @@
 package br.com.concessionaria.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIncludeProperties;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -26,9 +30,7 @@ public class Moto extends Veiculo {
             this.dataDeEntradaEstoque = dataDeEntradaEstoque;
         }
 
-    public Moto() {
-        super();
-    }
+    public Moto() {}
 
 	public int getCilindradaEmCc() {
 		return cilindradaEmCc;

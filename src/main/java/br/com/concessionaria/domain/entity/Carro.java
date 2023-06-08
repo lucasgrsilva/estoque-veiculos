@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class Carro extends Veiculo {
     private int cavalosPotencia;
     private BigDecimal cilindradaEmLitro;
-    private Boolean isTurbo;
+    private Boolean turbo;
     private int tipoRodas;
     private MarcasCarro marca;
 
@@ -16,7 +16,7 @@ public class Carro extends Veiculo {
         final String modelo,
         final int cavalosPotencia,
         final BigDecimal cilindradaEmLitro,
-        final Boolean isTurbo,
+        final Boolean turbo,
         final int tipoRodas,
         final MarcasCarro marca,
         final int anoFabricacao,
@@ -27,14 +27,12 @@ public class Carro extends Veiculo {
     		super(id,chassi,placa,modelo,anoFabricacao,dataDeEntradaEstoque,valorFipe,valorComprado);
             this.cavalosPotencia = cavalosPotencia;
             this.cilindradaEmLitro = cilindradaEmLitro;
-            this.isTurbo = isTurbo;
+            this.turbo = turbo;
             this.tipoRodas = tipoRodas;
             this.marca = marca;
 	}
 
-	public Carro() {
-        super();
-    }
+	public Carro() {}
 
 	public int getCavalosPotencia() {
 		return cavalosPotencia;
@@ -53,11 +51,11 @@ public class Carro extends Veiculo {
 	}
 
 	public Boolean isTurbo() {
-		return isTurbo;
+		return turbo;
 	}
 
-	public void setIsTurbo(Boolean isTurbo) {
-		this.isTurbo = isTurbo;
+	public void setTurbo(Boolean isTurbo) {
+		this.turbo = isTurbo;
 	}
 
 	public int getTipoRodas() {
