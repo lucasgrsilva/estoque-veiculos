@@ -26,7 +26,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
         classes = ConcessionariaApplication.class)
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class EndpointsVeiculoIT {
 
     @LocalServerPort
@@ -66,6 +65,7 @@ public class EndpointsVeiculoIT {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void quandoAcessadoCarro_AposAdicionado_DeveRetornarCarro() {
         RequisicaoNovoCarro novoCarro = new RequisicaoNovoCarro(78955, "pur12234", "Celta", 2000,
                 LocalDate.parse("2022-06-02"), BigDecimal.valueOf(20000), BigDecimal.valueOf(15000), 180,
@@ -80,6 +80,7 @@ public class EndpointsVeiculoIT {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void quandoTentarAdicionarCarro_PassandoChassiDuplicado_DeveRetornarExcecao() {
         RequisicaoNovoCarro novoCarro = new RequisicaoNovoCarro(123, "pur12234", "Celta", 2000,
                 LocalDate.parse("2022-06-02"), BigDecimal.valueOf(20000), BigDecimal.valueOf(15000), 180,
@@ -95,6 +96,7 @@ public class EndpointsVeiculoIT {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void quandoAcessadoVeiculo_AposDeletado_DeveRetornarExcecao() {
         int chassi = 321;
 
@@ -109,6 +111,7 @@ public class EndpointsVeiculoIT {
     }
 
     @Test
+    @DirtiesContext(methodMode = DirtiesContext.MethodMode.AFTER_METHOD)
     public void quandoBuscaVeiculosPorAnoDeFabricacao_PassandoAnoMinEanoMax_DeveRetornarVeiculosCorrespondentes() {
         RequisicaoNovoCarro carroAnoDesejado = new RequisicaoNovoCarro(189, "pur12234", "Celta", 2000,
                 LocalDate.parse("2022-06-02"), BigDecimal.valueOf(20000), BigDecimal.valueOf(15000), 180,
