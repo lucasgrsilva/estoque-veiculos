@@ -5,7 +5,6 @@ import br.com.concessionaria.domain.dto.RequisicaoNovaMoto;
 import br.com.concessionaria.domain.dto.RequisicaoNovoCarro;
 import br.com.concessionaria.domain.entity.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,8 +35,6 @@ public class EndpointsVeiculoIT {
     private TestRestTemplate restTemplate;
 
     private String applicationUrl;
-
-    private ObjectMapper mapper;
 
     @Before
     public void setUp() {
